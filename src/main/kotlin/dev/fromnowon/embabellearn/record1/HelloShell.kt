@@ -32,7 +32,7 @@ class HelloShell {
     @ShellMethod("讲笑话")
     fun joke(@ShellOption topic1: String, @ShellOption topic2: String, @ShellOption voice: String): Joke {
         return ai
-            .withLlm(LlmOptions.withDefaultLlm().withTemperature(.8))
+            .withLlm(LlmOptions.withDefaultLlm().withTemperature(.8)) // 高温实现创意
             .createObject(
                 """
                     Tell me a joke about $topic1 and $topic2.
