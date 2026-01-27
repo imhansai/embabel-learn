@@ -22,7 +22,7 @@ class ToolShell {
             // .withToolGroup(mathToolGroup)
             // .withToolGroup(CoreToolGroups.MATH)
             .withTools(mathTools)
-            .generateText("123 * 321 等于多少")
+            .generateText("2 + 5 * 3 等于多少")
     }
 
 }
