@@ -1,0 +1,6 @@
+[versions]
+embabel-agent = "0.3.3-SNAPSHOT"
+
+[libraries]
+embabel-agent-starter-shell = { group = "com.embabel.agent", name = "embabel-agent-starter-shell", version.ref = "embabel-agent" }
+embabel-agent-starter-openai-custom = { group = "com.embabel.agent", name = "embabel-agent-starter-openai-custom", version.ref = "embabel-agent" }
