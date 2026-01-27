@@ -1,11 +1,14 @@
 package dev.fromnowon.embabellearn.record1
 
 import com.embabel.agent.api.common.Ai
+import com.embabel.agent.api.common.streaming.StreamingPromptRunner
 import com.embabel.common.ai.model.LlmOptions
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.shell.standard.ShellComponent
 import org.springframework.shell.standard.ShellMethod
 import org.springframework.shell.standard.ShellOption
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.toJavaDuration
 
 @ShellComponent
 class HelloShell {
@@ -25,8 +28,24 @@ class HelloShell {
      * embabel agent 入门
      */
     @ShellMethod("生成文本")
-    fun hello(): String {
-        return ai.withDefaultLlm().generateText("你好,介绍一下自己")
+    fun hello() {
+        // 流式输出
+        val streamingRunner = ai.withDefaultLlm() as StreamingPromptRunner
+        val restaurantStream = streamingRunner.stream()
+            .withPrompt("你好，介绍一下自己")
+            .generateStream()
+
+        restaurantStream.timeout(150.seconds.toJavaDuration()).doOnSubscribe {
+            println("Stream subscription started")
+        }.doOnNext {
+            print(it)
+        }.doOnError {
+            it.printStackTrace()
+        }.doOnComplete {
+            println("Stream completed")
+        }.blockLast(6_000.seconds.toJavaDuration())
+
+        // return ai.withDefaultLlm().generateText("你好,介绍一下自己")
     }
 
     @ShellMethod("讲笑话")
