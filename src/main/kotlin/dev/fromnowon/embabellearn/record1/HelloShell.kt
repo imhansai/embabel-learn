@@ -31,7 +31,7 @@ class HelloShell {
     fun hello() {
         // 流式输出
         val streamingRunner = ai.withDefaultLlm() as StreamingPromptRunner
-        val restaurantStream = streamingRunner.stream()
+        val restaurantStream = streamingRunner.streaming()
             .withPrompt("你好，介绍一下自己")
             .generateStream()
 
