@@ -1,5 +1,5 @@
 [versions]
-embabel-agent = "0.3.3-SNAPSHOT"
+embabel-agent = "0.3.4-SNAPSHOT"
 
 [libraries]
 embabel-agent-starter-shell = { group = "com.embabel.agent", name = "embabel-agent-starter-shell", version.ref = "embabel-agent" }

@@ -42,14 +42,12 @@ class CorrectTheSalePriceAgent {
     ) : Stage {
 
         @Action
-        fun getFeedback(): HumanFeedback {
-            return fromForm(
-                """
-                    审查、调整数据
-                    $priceInfoList
-                    """.trimIndent(), HumanFeedback::class.java
-            )
-        }
+        fun getFeedback() = fromForm<HumanFeedback>(
+            """
+                审查、调整数据
+                $priceInfoList
+                """.trimIndent()
+        )
 
         @Action(clearBlackboard = true)
         fun assess(feedback: HumanFeedback, ai: Ai): Stage {
